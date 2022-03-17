@@ -21,9 +21,16 @@ const getTotalSupply = async () => {
 const getTokenInfo = async (index) => {
   try {
     const tokenInfo = await kor_mining_contract.methods
-      .tokenIdToMiner(index)
+      .tokenIdToToken(index)
       .call();
-    return tokenInfo;
+
+    const minerIndex = tokenInfo.index;
+    const miner = await kor_mining_contract.methods.miners(minerIndex).call();
+    return {
+      minerType: miner.minerType,
+      hashrate: miner.hashrate,
+      amount: tokenInfo.amount,
+    };
   } catch (err) {
     return null;
   }

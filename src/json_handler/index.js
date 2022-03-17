@@ -4,8 +4,8 @@ const constants = require("../constants");
 
 const exportJson = (index, minerType, hashRate, amount) => {
   let metaData = {};
-  metaData.name = "KOR Miner #" + index;
-  metaData.description = "KOR Miner #" + index;
+  metaData.name = "KOR #" + index;
+  metaData.description = "KOR #" + index;
   metaData.image = constants.imagePath + minerType + ".png";
   metaData.attributes = [];
 
