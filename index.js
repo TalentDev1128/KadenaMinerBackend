@@ -20,11 +20,10 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// router
-app.get("/api/updateBaseURI", async (req, res) => {
-  console.log("=== updateBaseURI api is called ===");
+const updateMetadataService = async () => {
   try {
     const totalSupply = await contract.getTotalSupply();
+    console.log(totalSupply);
 
     for (let i = 0; i < totalSupply; i++) {
       const tokenInfo = await contract.getTokenInfo(i + 1);
@@ -35,10 +34,21 @@ app.get("/api/updateBaseURI", async (req, res) => {
         tokenInfo.amount
       );
     }
-    res.json({ status: "success" });
+    return true;
   } catch (err) {
-    res.json({ status: "fail" });
+    return false;
   }
+};
+
+updateMetadataService();
+setInterval(updateMetadataService, 3600000); // update metadata every one hour
+
+// router
+app.post("/api/updateMetadata", async (req, res) => {
+  console.log("=== updateMetadata api is called ===");
+  const updated = updateMetadataService();
+  if (updated) res.json({ status: "success" });
+  else res.json({ status: "fail" });
 });
 
 app.get("/api/nft/:id", async (req, res) => {
