@@ -6,7 +6,7 @@ const exportJson = (index, minerType, hashRate, amount) => {
   let metaData = {};
   metaData.name = "KOR #" + index;
   metaData.description = "KOR #" + index;
-  metaData.image = constants.imagePath + minerType + ".png";
+  metaData.image = constants.imagePath + minerType + ".jpeg";
   metaData.attributes = [];
 
   metaData.attributes.push({
