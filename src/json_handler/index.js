@@ -18,11 +18,11 @@ const exportJson = (index, minerType, hashRate, amount, mintTime, expired) => {
   });
   metaData.attributes.push({
     trait_type: "HashRate",
-    value: newHashRate,
+    value: newHashRate.toString(),
   });
   metaData.attributes.push({
     trait_type: "Amount",
-    value: newAmount,
+    value: newAmount.toString(),
   });
   metaData.attributes.push({
     trait_type: "MintTime",
@@ -30,7 +30,7 @@ const exportJson = (index, minerType, hashRate, amount, mintTime, expired) => {
   });
   metaData.attributes.push({
     trait_type: "Expired",
-    value: expired,
+    value: expired ? "Expired" : "Not Expired",
   });
 
   const outFile = path.join(constants.jsonPath, index.toString());
