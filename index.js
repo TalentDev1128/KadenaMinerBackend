@@ -31,7 +31,9 @@ const updateMetadataService = async () => {
         i + 1,
         tokenInfo.minerType,
         tokenInfo.hashrate,
-        tokenInfo.amount
+        tokenInfo.amount,
+        tokenInfo.mintTime,
+        tokenInfo.expired
       );
     }
     return true;
